@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,13 +25,13 @@ namespace ProfilingDemo
 
         private async void StartButton_Click(object sender, EventArgs e)
         {
+            source.Cancel();
             source = new CancellationTokenSource();
             var token = source.Token;
             while (!token.IsCancellationRequested)
             {
                 BoardPictureBox.Image = await Task.Run(() =>
                 {
-
                     board = _engine.RunIteration(board);
                     return _painter.DrawBoard(board);
                 }, token);
@@ -46,6 +47,27 @@ namespace ProfilingDemo
         {
             board = _engine.GenerateBoard();
             BoardPictureBox.Image = _painter.DrawBoard(board);
+        }
+
+        private async void Run100IterationsButton_Click(object sender, EventArgs e)
+        {
+            var sw = new Stopwatch();
+            source.Cancel();
+            source = new CancellationTokenSource();
+            var token = source.Token;
+            var counter = 0;
+            sw.Start();
+            while (!token.IsCancellationRequested && counter < 100)
+            {
+                BoardPictureBox.Image = await Task.Run(() =>
+                {
+                    board = _engine.RunIteration(board);
+                    return _painter.DrawBoard(board);
+                }, token);
+                counter++;
+            }
+            sw.Stop();
+            TimeLabel.Text = $"Time of 100 iterations: {sw.ElapsedMilliseconds} ms";
         }
     }
 }

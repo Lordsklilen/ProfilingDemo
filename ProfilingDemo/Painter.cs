@@ -8,7 +8,6 @@ namespace ProfilingDemo
         private int _pictureHeight;
         private int _spaceSize = 1;
 
-        private readonly Pen _grayPen = new Pen(Color.Gray, 1);
         private readonly SolidBrush _blackBrush = new SolidBrush(Color.Black);
         private readonly SolidBrush _grayBrush = new SolidBrush(Color.Gray);
         public Painter(int pictureWidth, int pictureHeight)
@@ -38,11 +37,11 @@ namespace ProfilingDemo
                         var y = (int)(((_spaceSize * (j + 1))) + deltaY * j);
                         if (board[i, j])
                         {
-                            g.FillRectangle(_blackBrush, x, y, (int)deltaX, (int)deltaY);
+                            g.FillRectangle(new SolidBrush(Color.Black), x, y, (int)deltaX, (int)deltaY);
                         }
                         else
                         {
-                            g.FillRectangle(_grayBrush, x, y, (int)deltaX, (int)deltaY);
+                            g.FillRectangle(new SolidBrush(Color.Gray), x, y, (int)deltaX, (int)deltaY);
                         }
                     }
                 }

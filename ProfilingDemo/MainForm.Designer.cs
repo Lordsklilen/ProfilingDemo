@@ -33,6 +33,8 @@ namespace ProfilingDemo
             this.StopButton = new System.Windows.Forms.Button();
             this.GenerateButton = new System.Windows.Forms.Button();
             this.BoardPictureBox = new System.Windows.Forms.PictureBox();
+            this.Run100IterationsButton = new System.Windows.Forms.Button();
+            this.TimeLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.BoardPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,11 +76,32 @@ namespace ProfilingDemo
             this.BoardPictureBox.TabIndex = 3;
             this.BoardPictureBox.TabStop = false;
             // 
+            // Run100IterationsButton
+            // 
+            this.Run100IterationsButton.Location = new System.Drawing.Point(256, 13);
+            this.Run100IterationsButton.Name = "Run100IterationsButton";
+            this.Run100IterationsButton.Size = new System.Drawing.Size(114, 23);
+            this.Run100IterationsButton.TabIndex = 4;
+            this.Run100IterationsButton.Text = "Run 100 iterations";
+            this.Run100IterationsButton.UseVisualStyleBackColor = true;
+            this.Run100IterationsButton.Click += new System.EventHandler(this.Run100IterationsButton_Click);
+            // 
+            // TimeLabel
+            // 
+            this.TimeLabel.AutoSize = true;
+            this.TimeLabel.Location = new System.Drawing.Point(1035, 20);
+            this.TimeLabel.Name = "TimeLabel";
+            this.TimeLabel.Size = new System.Drawing.Size(137, 15);
+            this.TimeLabel.TabIndex = 5;
+            this.TimeLabel.Text = "Time of 100 iterations: 0s";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1219, 649);
+            this.Controls.Add(this.TimeLabel);
+            this.Controls.Add(this.Run100IterationsButton);
             this.Controls.Add(this.BoardPictureBox);
             this.Controls.Add(this.GenerateButton);
             this.Controls.Add(this.StopButton);
@@ -87,6 +110,7 @@ namespace ProfilingDemo
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.BoardPictureBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -96,6 +120,8 @@ namespace ProfilingDemo
         private System.Windows.Forms.Button StopButton;
         private System.Windows.Forms.Button GenerateButton;
         private System.Windows.Forms.PictureBox BoardPictureBox;
+        private System.Windows.Forms.Button Run100IterationsButton;
+        private System.Windows.Forms.Label TimeLabel;
     }
 }
 
