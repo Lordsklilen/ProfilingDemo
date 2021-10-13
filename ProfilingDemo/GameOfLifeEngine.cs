@@ -32,14 +32,14 @@ namespace ProfilingDemo
         int CountLiveNeighbours(int x, int y, bool[,] board)
         {
             int counter = 0;
+            var xSize = board.GetLength(0);
+            var ySize = board.GetLength(1);
             for (int i = -1; i <= 1; i++)
             {
                 for (int j = -1; j <= 1; j++)
                 {
-                    //if ((j + x) >= y || (j + x) <= -1)
-                    //break;// comment this to make it full thorus
-                    int widthId = (i + y) >= 0 ? (i + y) % (x) : x - 1;
-                    int heightId = (j + x) >= 0 ? (j + x) % (y) : y - 1;
+                    int heightId = (i + y) >= 0 ? (i + y) % (ySize) : y - 1 >= 0 ? y - 1 : ySize - 1;
+                    int widthId = (j + x) >= 0 ? (j + x) % (xSize) : x - 1 >= 0 ? x - 1 : xSize - 1;
                     if (board[widthId, heightId] && !(i == 0 && j == 0))
                         counter++;
                 }
@@ -61,7 +61,6 @@ namespace ProfilingDemo
                 {
                     newBoard[i, j] = CalculateState(i, j, board);
                 }
-
             }
             return newBoard;
         }
