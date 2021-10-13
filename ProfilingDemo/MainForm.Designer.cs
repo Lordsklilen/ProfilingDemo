@@ -70,7 +70,7 @@ namespace ProfilingDemo
             // 
             this.BoardPictureBox.Location = new System.Drawing.Point(13, 42);
             this.BoardPictureBox.Name = "BoardPictureBox";
-            this.BoardPictureBox.Size = new System.Drawing.Size(775, 396);
+            this.BoardPictureBox.Size = new System.Drawing.Size(800, 400);
             this.BoardPictureBox.TabIndex = 3;
             this.BoardPictureBox.TabStop = false;
             // 
@@ -78,7 +78,7 @@ namespace ProfilingDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(821, 449);
             this.Controls.Add(this.BoardPictureBox);
             this.Controls.Add(this.GenerateButton);
             this.Controls.Add(this.StopButton);

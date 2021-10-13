@@ -14,7 +14,7 @@ namespace ProfilingDemo
             _width = width;
         }
 
-        bool[,] GenerateBoard()
+        public bool[,] GenerateBoard()
         {
             var board = new bool[_width, _height];
             for (int i = 0; i < _width; i++)
@@ -52,7 +52,7 @@ namespace ProfilingDemo
             return board[x, y] ? neighbours == 2 || neighbours == 3 : neighbours == 3;
         }
 
-        bool[,] RunIteration(bool[,] board)
+        public bool[,] RunIteration(bool[,] board)
         {
             var newBoard = new bool[_width, _height];
             for (int i = 0; i < _width; i++)
