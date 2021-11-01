@@ -45,6 +45,7 @@ namespace ProfilingDemo
             }
             return counter;
         }
+
         bool CalculateState(int x, int y, bool[,] board)
         {
             int neighbours = CountLiveNeighbours(x, y, board);
@@ -63,23 +64,5 @@ namespace ProfilingDemo
             }
             return newBoard;
         }
-
-        public bool[,] RunIterationBad(bool[,] board)
-        {
-            var newBoard = new bool[_width, _height];
-            for (int i = 0; i < _width; i++)
-            {
-                for (int j = 0; j < _height; j++)
-                {
-                    newBoard[i, j] = CalculateStateBad(i, j, board);
-                }
-            }
-            return newBoard;
-        }
-        bool CalculateStateBad(int x, int y, bool[,] board)
-        {
-            return board[x, y] ? CountLiveNeighbours(x, y, board) == 2 || CountLiveNeighbours(x, y, board) == 3 : CountLiveNeighbours(x, y, board) == 3;
-        }
-
     }
 }

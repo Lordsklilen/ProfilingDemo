@@ -8,12 +8,12 @@ namespace ProfilingDemo
 {
     public partial class MainForm : Form
     {
-        CancellationTokenSource source = new CancellationTokenSource();
+        CancellationTokenSource source = new();
         private GameOfLifeEngine _engine;
         private Painter _painter;
         private bool[,] board;
-        private int _golWidth = 160;
-        private int _golHeight = 80;
+        private readonly int _golWidth = 160;
+        private readonly int _golHeight = 80;
 
         public MainForm()
         {
@@ -27,14 +27,16 @@ namespace ProfilingDemo
         {
             source.Cancel();
             source = new CancellationTokenSource();
-            var token = source.Token;
-            while (!token.IsCancellationRequested)
+            while (!source.Token.IsCancellationRequested)
             {
+                board = await Task.Run(() =>
+                {
+                    return _engine.RunIteration(board);
+                }, source.Token);
                 BoardPictureBox.Image = await Task.Run(() =>
                 {
-                    board = _engine.RunIteration(board);
                     return _painter.DrawBoard(board);
-                }, token);
+                }, source.Token);
             }
         }
 
@@ -54,20 +56,43 @@ namespace ProfilingDemo
             var sw = new Stopwatch();
             source.Cancel();
             source = new CancellationTokenSource();
-            var token = source.Token;
             var counter = 0;
             sw.Start();
-            while (!token.IsCancellationRequested && counter < 100)
+            while (!source.Token.IsCancellationRequested && counter < 100)
             {
+                board = await Task.Run(() =>
+                {
+                    return _engine.RunIteration(board);
+                }, source.Token);
                 BoardPictureBox.Image = await Task.Run(() =>
                 {
-                    board = _engine.RunIteration(board);
                     return _painter.DrawBoard(board);
-                }, token);
+                }, source.Token);
                 counter++;
             }
             sw.Stop();
             TimeLabel.Text = $"Time of 100 iterations: {sw.ElapsedMilliseconds} ms";
+        }
+
+        private void BoardPictureBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            var posX = (int)((double)e.X / BoardPictureBox.Width * _golWidth);
+            var posY = (int)((double)e.Y / BoardPictureBox.Height * _golHeight);
+            board[posX, posY] = !board[posX, posY];
+            BoardPictureBox.Image = _painter.DrawBoard(board);
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            board = new bool[_golWidth, _golHeight];
+            BoardPictureBox.Image = _painter.DrawBoard(board);
+        }
+
+        private void BoardPictureBox_SizeChanged(object sender, EventArgs e)
+        {
+            _engine = new GameOfLifeEngine(_golWidth, _golHeight);
+            _painter = new Painter(BoardPictureBox.Width, BoardPictureBox.Height);
+            BoardPictureBox.Image = _painter.DrawBoard(board);
         }
     }
 }

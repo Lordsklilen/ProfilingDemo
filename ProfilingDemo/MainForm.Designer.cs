@@ -35,6 +35,7 @@ namespace ProfilingDemo
             this.BoardPictureBox = new System.Windows.Forms.PictureBox();
             this.Run100IterationsButton = new System.Windows.Forms.Button();
             this.TimeLabel = new System.Windows.Forms.Label();
+            this.ClearButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BoardPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,15 +71,18 @@ namespace ProfilingDemo
             // 
             // BoardPictureBox
             // 
-            this.BoardPictureBox.Location = new System.Drawing.Point(13, 42);
+            this.BoardPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BoardPictureBox.Location = new System.Drawing.Point(0, 40);
             this.BoardPictureBox.Name = "BoardPictureBox";
-            this.BoardPictureBox.Size = new System.Drawing.Size(1200, 600);
+            this.BoardPictureBox.Size = new System.Drawing.Size(1219, 609);
             this.BoardPictureBox.TabIndex = 3;
             this.BoardPictureBox.TabStop = false;
+            this.BoardPictureBox.SizeChanged += new System.EventHandler(this.BoardPictureBox_SizeChanged);
+            this.BoardPictureBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BoardPictureBox_MouseClick);
             // 
             // Run100IterationsButton
             // 
-            this.Run100IterationsButton.Location = new System.Drawing.Point(256, 13);
+            this.Run100IterationsButton.Location = new System.Drawing.Point(337, 12);
             this.Run100IterationsButton.Name = "Run100IterationsButton";
             this.Run100IterationsButton.Size = new System.Drawing.Size(114, 23);
             this.Run100IterationsButton.TabIndex = 4;
@@ -89,17 +93,28 @@ namespace ProfilingDemo
             // TimeLabel
             // 
             this.TimeLabel.AutoSize = true;
-            this.TimeLabel.Location = new System.Drawing.Point(1035, 20);
+            this.TimeLabel.Location = new System.Drawing.Point(457, 17);
             this.TimeLabel.Name = "TimeLabel";
             this.TimeLabel.Size = new System.Drawing.Size(137, 15);
             this.TimeLabel.TabIndex = 5;
             this.TimeLabel.Text = "Time of 100 iterations: 0s";
+            // 
+            // ClearButton
+            // 
+            this.ClearButton.Location = new System.Drawing.Point(256, 12);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(75, 23);
+            this.ClearButton.TabIndex = 6;
+            this.ClearButton.Text = "Clear";
+            this.ClearButton.UseVisualStyleBackColor = true;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1219, 649);
+            this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.TimeLabel);
             this.Controls.Add(this.Run100IterationsButton);
             this.Controls.Add(this.BoardPictureBox);
@@ -107,7 +122,8 @@ namespace ProfilingDemo
             this.Controls.Add(this.StopButton);
             this.Controls.Add(this.StartButton);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Padding = new System.Windows.Forms.Padding(0, 40, 0, 0);
+            this.Text = "Profiling Demo";
             ((System.ComponentModel.ISupportInitialize)(this.BoardPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -122,6 +138,7 @@ namespace ProfilingDemo
         private System.Windows.Forms.PictureBox BoardPictureBox;
         private System.Windows.Forms.Button Run100IterationsButton;
         private System.Windows.Forms.Label TimeLabel;
+        private System.Windows.Forms.Button ClearButton;
     }
 }
 

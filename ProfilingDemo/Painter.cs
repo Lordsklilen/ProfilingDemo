@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 
 namespace ProfilingDemo
 {
@@ -8,8 +8,8 @@ namespace ProfilingDemo
         private int _pictureHeight;
         private int _spaceSize = 1;
 
-        private readonly SolidBrush _blackBrush = new SolidBrush(Color.Black);
-        private readonly SolidBrush _grayBrush = new SolidBrush(Color.Gray);
+        private readonly SolidBrush _blackBrush = new(Color.Black);
+        private readonly SolidBrush _grayBrush = new(Color.Gray);
         public Painter(int pictureWidth, int pictureHeight)
         {
 
@@ -33,8 +33,8 @@ namespace ProfilingDemo
                 {
                     for (int j = 0; j < ySize; j++)
                     {
-                        var x = (int)(((_spaceSize * (i + 1))) + deltaX * i);
-                        var y = (int)(((_spaceSize * (j + 1))) + deltaY * j);
+                        var x = (int)((_spaceSize * (i + 1)) + deltaX * i);
+                        var y = (int)((_spaceSize * (j + 1)) + deltaY * j);
                         if (board[i, j])
                         {
                             g.FillRectangle(new SolidBrush(Color.Black), x, y, (int)deltaX, (int)deltaY);
